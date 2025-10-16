@@ -1,21 +1,25 @@
 import React, { useState } from "react";
-import { FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight } from "react-icons/fi";
+import { FiMail, FiLock, FiUser, FiArrowRight, FiEye, FiEyeOff } from "react-icons/fi";
 
 // ✅ importer correctement l'image
 import img1 from "../assets/img1.png";
 
-export default function Login({ onNavigateToSignUp }) {
+export default function SignUp({ onNavigateToLogin }) {
   const [formData, setFormData] = useState({
+    username: "",
     email: "",
-    password: ""
+    password: "",
+    accountType: "",
+    registrationNumber: ""
   });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
 
@@ -25,7 +29,7 @@ export default function Login({ onNavigateToSignUp }) {
     
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
-      console.log("Connexion réussie:", formData);
+      console.log("Inscription réussie:", formData);
     } catch (error) {
       console.error("Erreur:", error);
     } finally {
@@ -46,120 +50,167 @@ export default function Login({ onNavigateToSignUp }) {
       </div>
 
       {/* ------- Partie gauche (formulaire) ------- */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-8 relative z-10">
-        <div className="w-full max-w-md space-y-6 animate-fade-in">
-          {/* En-tête avec animation */}
-          <div className="text-center animate-slide-down">
-            <div className="inline-flex items-center justify-center w-14 h-14 bg-[#00796B] rounded-2xl mb-4 shadow-lg transform hover:scale-105 transition-transform duration-300">
-              <div className="w-6 h-6 bg-white rounded-lg"></div>
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-6 relative z-10">
+        <div className="w-full max-w-sm space-y-4">
+          {/* En-tête */}
+          <div className="text-center">
+            <div className="inline-flex items-center justify-center w-10 h-10 bg-[#00796B] rounded-lg mb-2 shadow-lg">
+              <div className="w-4 h-4 bg-white rounded-sm"></div>
             </div>
-            <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">
-              Bienvenue
+            <h1 className="text-lg lg:text-xl font-bold text-gray-900 mb-1">
+              Créer un compte
             </h1>
-            <h2 className="text-lg lg:text-xl font-semibold text-gray-700 mb-1">
-              Connectez-vous à votre compte
-            </h2>
-            <p className="text-gray-500 text-sm">
-              Entrez vos coordonnées pour accéder à votre espace
+            <p className="text-gray-500 text-xs">
+              Rejoignez notre communauté
             </p>
           </div>
 
           {/* Formulaire */}
-          <form onSubmit={handleSubmit} className="space-y-4 animate-slide-up">
+          <form onSubmit={handleSubmit} className="space-y-2">
+            {/* Champ Nom d'utilisateur */}
+            <div className="space-y-1">
+              <label className="block text-xs font-medium text-gray-700">
+                Nom d'utilisateur
+              </label>
+              <div className="relative">
+                <FiUser className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs" />
+                <input
+                  name="username"
+                  type="text"
+                  required
+                  value={formData.username}
+                  onChange={handleChange}
+                  placeholder="Votre nom d'utilisateur"
+                  className="w-full h-8 pl-7 pr-2 bg-white border border-gray-300 rounded-md text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#00796B] focus:border-transparent transition-all duration-200"
+                />
+              </div>
+            </div>
+
             {/* Champ Email */}
-            <div className="space-y-2 transform hover:scale-[1.02] transition-transform duration-300">
-              <label className="block text-sm font-medium text-gray-700">
+            <div className="space-y-1">
+              <label className="block text-xs font-medium text-gray-700">
                 Email
               </label>
-              <div className="relative group">
-                <div className="absolute inset-0 bg-[#00796B]/10 rounded-lg blur-sm group-hover:blur transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
-                <div className="relative">
-                  <FiMail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg group-focus-within:text-[#00796B] transition-colors duration-300" />
-                  <input
-                    name="email"
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="example@company.com"
-                    className="w-full h-11 pl-12 pr-6 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00796B] focus:border-transparent transition-all duration-300 backdrop-blur-sm"
-                  />
-                </div>
+              <div className="relative">
+                <FiMail className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs" />
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="example@company.com"
+                  className="w-full h-8 pl-7 pr-2 bg-white border border-gray-300 rounded-md text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#00796B] focus:border-transparent transition-all duration-200"
+                />
               </div>
             </div>
 
             {/* Champ Mot de passe */}
-            <div className="space-y-2 transform hover:scale-[1.02] transition-transform duration-300">
-              <label className="block text-sm font-medium text-gray-700">
+            <div className="space-y-1">
+              <label className="block text-xs font-medium text-gray-700">
                 Mot de passe
               </label>
-              <div className="relative group">
-                <div className="absolute inset-0 bg-[#00796B]/10 rounded-lg blur-sm group-hover:blur transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
-                <div className="relative">
-                  <FiLock className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-lg group-focus-within:text-[#00796B] transition-colors duration-300" />
-                  <input
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    required
-                    value={formData.password}
-                    onChange={handleChange}
-                    placeholder="••••••••"
-                    className="w-full h-11 pl-12 pr-12 bg-white border border-gray-300 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00796B] focus:border-transparent transition-all duration-300 backdrop-blur-sm"
-                  />
-                  <button
-                    type="button"
-                    onClick={togglePasswordVisibility}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#00796B] transition-colors duration-300 hover:scale-110"
-                  >
-                    {showPassword ? <FiEyeOff className="text-lg" /> : <FiEye className="text-lg" />}
-                  </button>
-                </div>
+              <div className="relative">
+                <FiLock className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs" />
+                <input
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="••••••••"
+                  className="w-full h-8 pl-7 pr-7 bg-white border border-gray-300 rounded-md text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#00796B] focus:border-transparent transition-all duration-200"
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-[#00796B] transition-colors"
+                >
+                  {showPassword ? <FiEyeOff className="text-xs" /> : <FiEye className="text-xs" />}
+                </button>
               </div>
             </div>
 
-            {/* Lien mot de passe oublié */}
-            <div className="flex justify-end transform hover:translate-x-1 transition-transform duration-300">
-              <a 
-                href="#" 
-                className="text-sm text-[#00796B] font-medium hover:text-[#00695C] transition-colors duration-300 flex items-center space-x-1"
-              >
-                <span>Mot de passe oublié ?</span>
-                <FiArrowRight className="text-xs" />
-              </a>
+            {/* Type de compte */}
+            <div className="space-y-1">
+              <label className="block text-xs font-medium text-gray-700">
+                Type de compte
+              </label>
+              <div className="grid grid-cols-2 gap-1">
+                <button
+                  type="button"
+                  onClick={() => setFormData({...formData, accountType: 'psychiatre'})}
+                  className={`h-8 border rounded-md font-medium transition-all duration-200 text-xs ${
+                    formData.accountType === 'psychiatre' 
+                      ? 'border-[#00796B] bg-[#00796B] text-white shadow-sm' 
+                      : 'border-gray-300 bg-white text-gray-700 hover:border-[#00796B] hover:bg-[#00796B]/5'
+                  }`}
+                >
+                  Psychiatre
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setFormData({...formData, accountType: 'rafiq'})}
+                  className={`h-8 border rounded-md font-medium transition-all duration-200 text-xs ${
+                    formData.accountType === 'rafiq' 
+                      ? 'border-[#00796B] bg-[#00796B] text-white shadow-sm' 
+                      : 'border-gray-300 bg-white text-gray-700 hover:border-[#00796B] hover:bg-[#00796B]/5'
+                  }`}
+                >
+                  Rafiq
+                </button>
+              </div>
             </div>
 
-            {/* Bouton se connecter */}
+            {/* Numéro d'enregistrement CNOM (conditionnel) */}
+            {formData.accountType === 'psychiatre' && (
+              <div className="space-y-1">
+                <label className="block text-xs font-medium text-gray-700">
+                  Numéro CNOM
+                </label>
+                <div className="relative">
+                  <input
+                    name="registrationNumber"
+                    type="text"
+                    required
+                    value={formData.registrationNumber}
+                    onChange={handleChange}
+                    placeholder="Votre numéro CNOM"
+                    className="w-full h-8 pl-2 pr-2 bg-white border border-gray-300 rounded-md text-xs text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#00796B] focus:border-transparent transition-all duration-200"
+                  />
+                </div>
+              </div>
+            )}
+
+            {/* Bouton s'inscrire */}
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full h-11 bg-[#00796B] text-white font-semibold rounded-xl hover:bg-[#00695C] focus:outline-none focus:ring-2 focus:ring-[#00796B] focus:ring-offset-2 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none relative overflow-hidden shadow-lg"
+              className="w-full h-8 bg-[#00796B] text-white font-medium rounded-md hover:bg-[#00695C] focus:outline-none focus:ring-1 focus:ring-[#00796B] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-xs mt-1"
             >
-              {/* Effet de brillance */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              
               {isLoading ? (
-                <div className="flex items-center justify-center space-x-2">
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Connexion...</span>
+                <div className="flex items-center justify-center space-x-1">
+                  <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span>Inscription...</span>
                 </div>
               ) : (
-                <div className="flex items-center justify-center space-x-2">
-                  <span>Se connecter</span>
-                  <FiArrowRight className="text-lg" />
+                <div className="flex items-center justify-center space-x-1">
+                  <span>S'inscrire</span>
+                  <FiArrowRight className="text-xs" />
                 </div>
               )}
             </button>
 
-            {/* Lien s'inscrire */}
-            <div className="text-center transform hover:scale-105 transition-transform duration-300">
-              <p className="text-gray-600 text-sm">
-                Vous n'avez pas de compte ?{" "}
+            {/* Lien se connecter */}
+            <div className="text-center pt-1">
+              <p className="text-gray-600 text-xs">
+                Vous avez déjà un compte ?{" "}
                 <button 
                   type="button"
-                  onClick={onNavigateToSignUp}
-                  className="text-[#00796B] font-medium hover:text-[#00695C] transition-colors duration-300 inline-flex items-center space-x-1"
+                  onClick={onNavigateToLogin}
+                  className="text-[#00796B] font-medium hover:text-[#00695C] transition-colors duration-200 inline-flex items-center space-x-1"
                 >
-                  <span>S'inscrire</span>
+                  <span>Se connecter</span>
                   <FiArrowRight className="text-xs" />
                 </button>
               </p>
@@ -187,7 +238,7 @@ export default function Login({ onNavigateToSignUp }) {
             <div className="relative transform transition-all duration-700 group-hover:scale-105 group-hover:-translate-y-2">
               <img
                 src={img1}
-                alt="Illustration connexion sécurisée"
+                alt="Illustration inscription"
                 className="w-72 h-72 object-contain drop-shadow-2xl filter brightness-110 contrast-110"
                 style={{
                   transform: 'perspective(1000px) rotateY(-5deg) rotateX(5deg)',
@@ -216,16 +267,16 @@ export default function Login({ onNavigateToSignUp }) {
           {/* Texte descriptif */}
           <div className="mt-6 space-y-3 animate-fade-in-up">
             <h3 className="text-xl font-bold tracking-tight">
-              Sécurité Avancée
+              Rejoignez Notre Réseau
             </h3>
             <p className="text-white/80 leading-relaxed text-base max-w-md">
-              Accédez à votre espace personnel en toute sécurité avec notre système d'authentification protégé
+              Créez votre compte et bénéficiez d'un accompagnement personnalisé selon votre profil
             </p>
           </div>
 
           {/* Points d'information animés */}
           <div className="mt-6 flex flex-wrap justify-center gap-4 animate-stagger">
-            {['Chiffrement SSL', 'Authentification 2FA', 'Protection des données'].map((item, index) => (
+            {['Profil Personnalisé', 'Accompagnement', 'Réseau Professionnel'].map((item, index) => (
               <div 
                 key={item}
                 className="flex items-center space-x-2 text-white/90 transform hover:scale-110 transition-transform duration-300"

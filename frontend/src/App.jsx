@@ -1,13 +1,18 @@
 import { useState } from 'react'
-
 import './App.css'
+import Login from './pages/login'
+import SignUp from './pages/Signup'
 
 function App() {
- 
+  const [currentPage, setCurrentPage] = useState('login')
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-blue-600">Tailwind CSS fonctionne 🎉</h1>
+      {currentPage === 'login' ? (
+        <Login onNavigateToSignUp={() => setCurrentPage('signup')} />
+      ) : (
+        <SignUp onNavigateToLogin={() => setCurrentPage('login')} />
+      )}
     </>
   )
 }
