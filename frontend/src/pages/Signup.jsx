@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { FiMail, FiLock, FiUser, FiArrowRight, FiEye, FiEyeOff } from "react-icons/fi";
-
-// ✅ importer correctement l'image
 import img1 from "../assets/img1.png";
 
 export default function SignUp({ onNavigateToLogin }) {
@@ -43,16 +41,16 @@ export default function SignUp({ onNavigateToLogin }) {
 
   return (
     <div className="flex h-screen max-h-screen font-[Poppins] bg-white overflow-hidden">
-      {/* Animation de fond */}
+
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-to-br from-[#00796B]/5 to-[#004D40]/5 rounded-full animate-pulse"></div>
         <div className="absolute -bottom-1/2 -left-1/2 w-full h-full bg-gradient-to-tr from-[#00796B]/5 to-[#004D40]/5 rounded-full animate-pulse delay-1000"></div>
       </div>
 
-      {/* ------- Partie gauche (formulaire) ------- */}
+      
       <div className="w-full lg:w-1/2 flex items-center justify-center p-4 lg:p-6 relative z-10">
         <div className="w-full max-w-sm space-y-4">
-          {/* En-tête */}
+       
           <div className="text-center">
             <div className="inline-flex items-center justify-center w-10 h-10 bg-[#00796B] rounded-lg mb-2 shadow-lg">
               <div className="w-4 h-4 bg-white rounded-sm"></div>
@@ -67,7 +65,7 @@ export default function SignUp({ onNavigateToLogin }) {
 
           {/* Formulaire */}
           <form onSubmit={handleSubmit} className="space-y-2">
-            {/* Champ Nom d'utilisateur */}
+            
             <div className="space-y-1">
               <label className="block text-xs font-medium text-gray-700">
                 Nom d'utilisateur
@@ -86,7 +84,7 @@ export default function SignUp({ onNavigateToLogin }) {
               </div>
             </div>
 
-            {/* Champ Email */}
+            
             <div className="space-y-1">
               <label className="block text-xs font-medium text-gray-700">
                 Email
@@ -105,7 +103,7 @@ export default function SignUp({ onNavigateToLogin }) {
               </div>
             </div>
 
-            {/* Champ Mot de passe */}
+            
             <div className="space-y-1">
               <label className="block text-xs font-medium text-gray-700">
                 Mot de passe
@@ -131,7 +129,7 @@ export default function SignUp({ onNavigateToLogin }) {
               </div>
             </div>
 
-            {/* Type de compte */}
+            
             <div className="space-y-1">
               <label className="block text-xs font-medium text-gray-700">
                 Type de compte
@@ -162,7 +160,7 @@ export default function SignUp({ onNavigateToLogin }) {
               </div>
             </div>
 
-            {/* Numéro d'enregistrement CNOM (conditionnel) */}
+            
             {formData.accountType === 'psychiatre' && (
               <div className="space-y-1">
                 <label className="block text-xs font-medium text-gray-700">
@@ -182,7 +180,7 @@ export default function SignUp({ onNavigateToLogin }) {
               </div>
             )}
 
-            {/* Bouton s'inscrire */}
+            
             <button
               type="submit"
               disabled={isLoading}
@@ -201,7 +199,7 @@ export default function SignUp({ onNavigateToLogin }) {
               )}
             </button>
 
-            {/* Lien se connecter */}
+           
             <div className="text-center pt-1">
               <p className="text-gray-600 text-xs">
                 Vous avez déjà un compte ?{" "}
@@ -221,20 +219,20 @@ export default function SignUp({ onNavigateToLogin }) {
 
       {/* ------- Partie droite (illustration 3D) ------- */}
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#00796B] to-[#004D40] items-center justify-center relative overflow-hidden">
-        {/* Effets de fond animés */}
+        
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/10 rounded-full animate-float-slow"></div>
           <div className="absolute -bottom-12 -left-12 w-28 h-28 bg-white/5 rounded-full animate-float-medium"></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 bg-white/5 rounded-full animate-pulse"></div>
         </div>
 
-        {/* Container illustration 3D */}
+        
         <div className="relative z-10 flex flex-col items-center text-center text-white px-8 animate-scale-in">
           <div className="relative group cursor-pointer">
-            {/* Effet de halo */}
+            
             <div className="absolute -inset-4 bg-white/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-1000 opacity-0 group-hover:opacity-100 animate-pulse"></div>
             
-            {/* Image avec effet 3D */}
+            
             <div className="relative transform transition-all duration-700 group-hover:scale-105 group-hover:-translate-y-2">
               <img
                 src={img1}
@@ -246,7 +244,7 @@ export default function SignUp({ onNavigateToLogin }) {
                 }}
               />
               
-              {/* Reflet 3D */}
+              
               <div 
                 className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent rounded-lg mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
@@ -254,7 +252,7 @@ export default function SignUp({ onNavigateToLogin }) {
                 }}
               ></div>
 
-              {/* Ombre portée 3D */}
+              
               <div 
                 className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-56 h-4 bg-black/20 rounded-full blur-lg group-hover:blur-xl transition-all duration-500"
                 style={{
@@ -264,7 +262,7 @@ export default function SignUp({ onNavigateToLogin }) {
             </div>
           </div>
 
-          {/* Texte descriptif */}
+          
           <div className="mt-6 space-y-3 animate-fade-in-up">
             <h3 className="text-xl font-bold tracking-tight">
               Rejoignez Notre Réseau
@@ -274,7 +272,7 @@ export default function SignUp({ onNavigateToLogin }) {
             </p>
           </div>
 
-          {/* Points d'information animés */}
+          
           <div className="mt-6 flex flex-wrap justify-center gap-4 animate-stagger">
             {['Profil Personnalisé', 'Accompagnement', 'Réseau Professionnel'].map((item, index) => (
               <div 
